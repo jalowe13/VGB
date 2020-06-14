@@ -9,7 +9,8 @@ public class VBG_ROOM_EVENTS : MonoBehaviour
 	public GameObject TV; //Reference of the TV object
 	public GameObject door; //Reference of the Door Object
 	public GameObject dialogueEvents; // Reference of Text to enable to speech
-	public bool eventNotRunning;
+	public string collisionItem; //String for what item is colliding
+	public string collisionKind; //String for what kind of collision
 	//[SerializeField] private Script vgb;
 	/*
 	public Script player_script;
@@ -20,43 +21,53 @@ public class VBG_ROOM_EVENTS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		eventNotRunning = true;
+		collisionItem = player.GetComponent<VGB_Script>().CollisionCheck();
+		collisionKind = player.GetComponent<VGB_Script>().KindCheck();
     }
 	
 	void checkEvents() //Checking if a event is running before checking the collision type
 	{
 		//Precheck
-		eventNotRunning = dialogueEvents.GetComponentInChildren<TypeWriterText>().eventNotRunning;
-		eventNotRunning = door.GetComponent<DoorScript>().eventNotRunning;
+		collisionItem = player.GetComponent<VGB_Script>().CollisionCheck();
+		collisionKind = player.GetComponent<VGB_Script>().KindCheck();
 		//Debug.Log("[" + currentFile + "] " + "Event not running in tv is " + dialogueEvents.GetComponentInChildren<TypeWriterText>().eventNotRunning);
 		//Check
-		if (eventNotRunning) // If a event is not currently running
-		{
-			Debug.Log("[" + currentFile + "] " + "checking collision tag " + player.GetComponent<VGB_Script>().CollisionCheck());
+			//Debug.Log("[" + currentFile + "] " + "checking collision tag " + player.GetComponent<VGB_Script>().CollisionCheck());
 			TVCollision(); //Check if colliding with TV
 			DoorsCollision();
-		}
 	}
 	
 	
 	void TVCollision() //Checking if TV Collision
 	{
-		if(player.GetComponent<VGB_Script>().CollisionCheck() == "TV")
+		if(collisionItem == "TV")
 		{
-			dialogueEvents.SetActive(true);
-			dialogueEvents.GetComponentInChildren<TypeWriterText>().displayEvent();
+			//Debug.Log("VGB is touching the TV");
+			if(player.GetComponent<VGB_Script>().KindCheck() == "enter")
+			{
+				dialogueEvents.SetActive(true); //Turn on dialouge box
+				dialogueEvents.GetComponentInChildren<TypeWriterText>().displayEvent(); //Type out dialouge
+			}
+			if (player.GetComponent<VGB_Script>().KindCheck() == "exit")
+			{
+				dialogueEvents.SetActive(false); //Turn off dialouge box
+			}
 		}
 	}
     void DoorsCollision() //Checking if Door Collision
 	{
-		if(player.GetComponent<VGB_Script>().CollisionCheck() == "Doors")
+		//Debug.Log("Collision Item: " + collisionItem);
+		if(collisionItem == "Doors")
 		{
-			Debug.Log("VGB is touching a door");
-			door.GetComponent<DoorScript>().OpenDoor();
-			//eventNotRunning = false;
-			//Debug.Log("[" + currentFile + "] " + " found event TV Collision");
-			//dialogueEvents.SetActive(true);
-			//dialogueEvents.GetComponentInChildren<TypeWriterText>().displayEvent();
+			//Debug.Log("VGB is touching a door");
+			if(player.GetComponent<VGB_Script>().KindCheck() == "stay")
+			{
+				door.GetComponent<DoorScript>().OpenDoor();
+			}
+			if (player.GetComponent<VGB_Script>().KindCheck() == "exit")
+			{
+				door.GetComponent<DoorScript>().CloseDoor();
+			}
 		}
 	}
 	// Update is called once per frame

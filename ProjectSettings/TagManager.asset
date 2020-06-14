@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Doors
   - TV
+  - Ground
   layers:
   - Default
   - TransparentFX

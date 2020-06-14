@@ -7,6 +7,7 @@ public class DoorScript : MonoBehaviour
 	string currentFile = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName(); //Current Script
 	public SpriteRenderer spriteRenderer;
 	public BoxCollider2D collideDetect;
+	public bool inside;
 	public bool eventNotRunning;
 	private AudioSource source;
 	
@@ -31,7 +32,7 @@ public class DoorScript : MonoBehaviour
 	*/
 	public void OpenDoor()
 	{
-			Debug.Log("Inside!");
+			//Debug.Log("Inside!");
 			eventNotRunning = false;
 			source.Play();
 			spriteRenderer.sprite = openLeftImage;
@@ -40,17 +41,11 @@ public class DoorScript : MonoBehaviour
 	}
 	public void CloseDoor()
 	{
-			Debug.Log("Outside!");
+			//Debug.Log("Outside!");
 			//StartCoroutine(SecondDelay(2));
 			spriteRenderer.sprite = closedImage;
 			//collideDetect.isTrigger = false;
 			eventNotRunning = true;
-	}
-	
-	public void playAnimation()
-	{
-		OpenDoor();
-		CloseDoor();
 	}
 	
 

@@ -11,13 +11,11 @@ public class TV_Script : MonoBehaviour
     {
         
     }
-	/*
-	GameObject OnCollisionEnter2D(Collision2D collision)
+	
+	public void InspectTV()
 	{
-		Debug.Log("[" + currentFile + "] " + collision.gameObject.tag + "has collided into me!, Returning Status");
-		return collision.gameObject;
+		
 	}
-	*/
     // Update is called once per frame
     void Update()
     {
