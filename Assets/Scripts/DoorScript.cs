@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+	string currentFile = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName(); //Current Script
 	public SpriteRenderer spriteRenderer;
 	public BoxCollider2D collideDetect;
+	public bool eventNotRunning;
 	private AudioSource source;
+	
 	[SerializeField] private Sprite openLeftImage,openRightImage,closedImage;
 	
 	
@@ -14,42 +17,43 @@ public class DoorScript : MonoBehaviour
     void Start()
     {
 		source = GetComponent<AudioSource>(); // Getting the audio for opening door
+		eventNotRunning = true;
     }
 	
-
+/*
 	IEnumerator SecondDelay(float seconds)
 	{
 		yield return new WaitForSeconds(seconds);
-		Debug.Log("Closing");
 			spriteRenderer.sprite = closedImage;
 			collideDetect.enabled = true;
+			eventNotRunning = true;
 	}
-	
-	void OnCollisionEnter2D(Collision2D collision)
+	*/
+	public void OpenDoor()
 	{
-		Debug.Log("Enter");
-		if (collision.gameObject.tag == "Player")
-		{
+			Debug.Log("Inside!");
+			eventNotRunning = false;
 			source.Play();
 			spriteRenderer.sprite = openLeftImage;
-			collideDetect.enabled = false;
-			
-		}
+			//collideDetect.isTrigger = true;
+			//collideDetect.enabled = false;
 	}
-	void OnCollisionExit2D(Collision2D collision)
+	public void CloseDoor()
 	{
-			StartCoroutine(SecondDelay(2));
+			Debug.Log("Outside!");
+			//StartCoroutine(SecondDelay(2));
+			spriteRenderer.sprite = closedImage;
+			//collideDetect.isTrigger = false;
+			eventNotRunning = true;
 	}
 	
-	void OnCollisionStay2D(Collision2D collision)
+	public void playAnimation()
 	{
-	if (collision.gameObject.tag == "Player")
-		{
-			spriteRenderer.sprite = openLeftImage;
-			collideDetect.enabled = false;
-			
-		}
+		OpenDoor();
+		CloseDoor();
 	}
+	
+
 
 
     // Update is called once per frame

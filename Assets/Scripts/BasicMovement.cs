@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
+	string currentFile = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName(); //Current Script
     [SerializeField] private LayerMask groundLayerMask;
     public Animator animator;
     private Rigidbody2D rigidbody2d;
