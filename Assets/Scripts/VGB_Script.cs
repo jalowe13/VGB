@@ -73,8 +73,13 @@ public class VGB_Script : MonoBehaviour
 		kind = "stay";
 		}
 	}
-	
-	
+
+	public void ResetCollisionCheck() //Sets Collisions back to unknown (Could not find a collision)
+	{
+		eventType = "unknown";
+		kind = "unknown";
+	}
+
 	public string CollisionCheck()
 	{
 		return eventType;

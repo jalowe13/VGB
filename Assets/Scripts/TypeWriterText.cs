@@ -28,12 +28,12 @@ public class TypeWriterText : MonoBehaviour
 	
     IEnumerator DisplayText() //Typewriter display
 	{
-		for (int i = 0; i < fullDisp.Length; i++)
+		for (int i = 0; i <= fullDisp.Length; i++)
 		{
 			currentDisp = fullDisp.Substring(0,i);
 			this.GetComponent<Text>().text = currentDisp;
 			talkSound.Play();
-			if (i == fullDisp.Length - 1)
+			if (i == fullDisp.Length)
 			{
 				yield return new WaitForSeconds(delay + 5);
 			}
@@ -41,6 +41,6 @@ public class TypeWriterText : MonoBehaviour
 			yield return new WaitForSeconds(delay);
 		}
 		this.GetComponent<Text>().text = "";
-		this.transform.parent.gameObject.SetActive(false);
+		this.gameObject.SetActive(false);
 	}
 }
