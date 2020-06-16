@@ -7,16 +7,57 @@ public class BasicMovement : MonoBehaviour
 {
 	string currentFile = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName(); //Current Script
     [SerializeField] private LayerMask groundLayerMask;
-    public Animator animator;
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D boxCollider2d;
+    private GameObject player;
+    private SpriteRenderer spriteRenderer;
+    public Sprite[] idle;
+    public Sprite[] gaming;
+    public Sprite[] sit;
+    public Sprite[] gaming_idle;
+
 
     private void Awake()
     {
         rigidbody2d = transform.GetComponent<Rigidbody2D>();
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
+        //player = this.parent;
+        spriteRenderer = transform.GetComponent<SpriteRenderer>();
     }
 
+    private void idleCheck()
+    {
+        if (!Input.anyKeyDown) // Checking for Any Key being down for idle animation
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                spriteRenderer.sprite = idle[i];
+            }
+        }
+    }
+
+    private void checkIdle()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("I want to sit");
+            for (int i = 0; i < sit.Length; i++)
+            {
+                spriteRenderer.sprite = sit[i];
+            }
+            spriteRenderer.sprite = sit[sit.Length];
+            player.GetComponent<VGB_Script>().checkSitting(true, true);
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            Debug.Log("I will now stand");
+            for (int i = sit.Length; i > -1; i++)
+            {
+                spriteRenderer.sprite = sit[i];
+            }
+            player.GetComponent<VGB_Script>().checkSitting(true, false);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,13 +71,16 @@ public class BasicMovement : MonoBehaviour
             rigidbody2d.velocity = Vector2.up * jump_vel;
         }
 
+        idleCheck();
+        checkIdle();
+
 
 
         //Horizontal X Direction Movement
 
 
         // Getting the Current component X and Y
-        animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        //animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 
 
         //Making a new Vector of movement for that component

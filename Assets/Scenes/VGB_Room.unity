@@ -7955,6 +7955,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventType: 
   kind: 
+  spriteRenderer: {fileID: 653113848}
+  gaming:
+  - {fileID: 8091366060232755116, guid: 72692cb5f72386a478e6643be38a4790, type: 3}
+  - {fileID: -3842541095118525495, guid: 72692cb5f72386a478e6643be38a4790, type: 3}
+  - {fileID: -1927867938132658815, guid: 72692cb5f72386a478e6643be38a4790, type: 3}
+  sit:
+  - {fileID: -5807638943261140425, guid: 7521bba17d338d44fa573ad0cd1e797a, type: 3}
+  - {fileID: -6006175823013217343, guid: 7521bba17d338d44fa573ad0cd1e797a, type: 3}
+  gaming_idle:
+  - {fileID: 470070573897121797, guid: 24aeb7448894cfd4b94ac953d134b77f, type: 3}
+  - {fileID: 3826422715176402619, guid: 24aeb7448894cfd4b94ac953d134b77f, type: 3}
 --- !u!1 &656379723
 GameObject:
   m_ObjectHideFlags: 0
@@ -13392,7 +13403,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 11b712742f78dc949bd3cefe2f3c8606, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.029
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -14594,7 +14605,7 @@ MonoBehaviour:
   collideDetect: {fileID: 1298933137}
   inside: 0
   eventNotRunning: 0
-  isLocked: 0
+  isLocked: 1
   openLeftImage: {fileID: 21300000, guid: 4af787a18dec6ea419ecdcbe896ea3f0, type: 3}
   openRightImage: {fileID: 21300000, guid: 85318228558d62448b019054ed5d8c26, type: 3}
   closedImage: {fileID: 21300000, guid: e20e368cc4665584ea9b7e4825b1c8cf, type: 3}

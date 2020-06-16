@@ -10,6 +10,7 @@ public class DoorScript : MonoBehaviour
 	public bool inside;
 	public bool eventNotRunning;
 	public bool isLocked;
+	private bool soundPlayed;
 	private AudioSource source;
 	
 	[SerializeField] private Sprite openLeftImage,openRightImage,closedImage;
@@ -19,6 +20,8 @@ public class DoorScript : MonoBehaviour
     void Start()
     {
 		source = GetComponent<AudioSource>(); // Getting the audio for opening door
+		soundPlayed = false;
+		isLocked = true;
     }
 
 	public void OpenDoor()
@@ -27,7 +30,10 @@ public class DoorScript : MonoBehaviour
         {
 			collideDetect.isTrigger = true;
 			//Debug.Log("Inside!");
-			source.Play();
+			if (!soundPlayed)
+			{
+				source.Play();
+			}
 			spriteRenderer.sprite = openLeftImage;
 
 			//collideDetect.enabled = false;

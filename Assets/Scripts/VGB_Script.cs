@@ -7,12 +7,20 @@ public class VGB_Script : MonoBehaviour
 	string currentFile = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName(); //Current Script
 	public string eventType;
 	public string kind;
+
+
+	// Physical Conditions
+	private bool sitting;
+
+
+
 	//private BoxCollider2D collideDetect;
     // Start is called before the first frame update
     void Start()
     {
 		eventType = "unknown";
 		kind = "unknown";
+		sitting = false;
     }
 	void OnCollisionEnter2D(Collision2D collision) //Default Check for Events with Player Trigger
 	{
@@ -89,11 +97,21 @@ public class VGB_Script : MonoBehaviour
 	{
 		return kind;
 	}
+
+	public bool checkSitting(bool modify, bool value)
+    {
+		if (modify)
+        {
+			this.sitting = value;
+        }
+		return this.sitting;
+    }
+
 	
     // Update is called once per frame
     void Update()
     {
-        		
+		
     }
 	
 
